@@ -63,7 +63,7 @@
     nav a:hover{transform:translateY(-3px);background:rgba(74,144,226,0.06)}
     .dark-mode-toggle{cursor:pointer;padding:8px;border-radius:8px;font-size:1.05rem}
 
-    /* ---------- HERO (UNCHANGED — your approved front page) ---------- */
+    /* ---------- Hero ---------- */
     #hero{
       height:100vh;min-height:640px;display:grid;place-items:center;padding-top:40px;position:relative;overflow:hidden;
       background:linear-gradient(135deg,#ffdce6 0%, #fff0f6 30%, #eaf8ff 100%);
@@ -83,7 +83,7 @@
       font-size:2.8rem;
       line-height:1.1;
       margin-bottom:12px;
-      cursor:default;
+      cursor:pointer;
       letter-spacing:-0.5px;
       background: linear-gradient(90deg, #b100ff, #ff69b4, #b100ff);
       background-size: 200% auto;
@@ -109,7 +109,7 @@
     .p1{width:260px;height:160px;left:-40px;top:12%;background:linear-gradient(135deg,#ffdede,#ffd1f0);transform:rotate(-6deg)}
     .p2{width:180px;height:180px;right:6%;top:6%;border-radius:50%;background:linear-gradient(135deg,#e0f8ff,#cdeef7)}
     .p3{width:120px;height:120px;left:22%;bottom:8%;background:linear-gradient(135deg,#fff2d0,#ffd6e6)}
-    .profile-wrap{width:100%;border-radius:20px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));box-shadow:0 20px 40px var(--glass-shadow);backdrop-filter: blur(6px);transition:transform .25s;}
+    .profile-wrap{width:100%;border-radius:20px;padding:18px;background:linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.75));box-shadow:0 20px 40px var(--glass-shadow);backdrop-filter: blur(6px);transition:transform .25s; position:relative;}
     .profile-meta{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
     .meta-left h3{font-size:1.03rem;margin:0}
     .meta-left p{font-size:0.85rem;margin:0;color:rgba(34,34,34,0.6)}
@@ -118,20 +118,79 @@
     .scroll-indicator{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);font-size:1.5rem;color:var(--calm1);opacity:0.95;animation:floaty 2.2s infinite;z-index:5}
     @keyframes floaty{0%{transform:translate(-50%,0)}50%{transform:translate(-50%,-10px)}100%{transform:translate(-50%,0)}}
 
-    /* ---------- Sections: backgrounds & blending ---------- */
-    section{padding:calc(var(--section-gap)) 0;position:relative}
+    /* ---------- Aesthetic Animation Box (Improved) ---------- */
+    .aesthetics-wrap{
+      position:absolute;
+      right:18px;
+      top:18px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:12px;
+      padding:8px 12px;
+      border-radius:12px;
+      min-width:220px;
+      max-width:100%;
+      z-index:6;
+      overflow:visible;
+    }
+    .aesthetic-canvas{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      pointer-events:none;
+      z-index:1;
+      border-radius:10px;
+      opacity:0.98;
+    }
+    .aesthetic-layer{
+      position:relative;
+      z-index:2;
+      display:flex;
+      flex-direction:column;
+      align-items:flex-end;
+      min-width:220px;
+    }
+    .aesthetic-text{
+      font-weight:700;
+      color:var(--calm1);
+      font-size:0.98rem;
+      letter-spacing:0.2px;
+      opacity:0;
+      transform:translateY(6px);
+      transition:opacity 1s ease, transform 0.9s cubic-bezier(.2,.9,.2,1);
+      text-align:right;
+      text-shadow: 0 6px 18px rgba(74,144,226,0.06);
+    }
+    .aesthetic-sub{
+      font-size:0.78rem;
+      color:rgba(0,0,0,0.55);
+      margin-top:4px;
+      opacity:0;
+      transform:translateY(6px);
+      transition:opacity 1s ease 0.12s, transform 0.9s cubic-bezier(.2,.9,.2,1) 0.12s;
+      text-align:right;
+    }
+    .aesthetic-visible .aesthetic-text,
+    .aesthetic-visible .aesthetic-sub {
+      opacity:1;
+      transform:translateY(0);
+    }
+    .aesthetic-visible .aesthetic-text {
+      box-shadow: 0 10px 30px rgba(177,0,255,0.04);
+      text-shadow: 0 0 14px rgba(177,0,255,0.06);
+    }
+
+    /* ---------- Sections ---------- */
+    section{padding:var(--section-gap) 0;position:relative}
     h2{font-size:2rem;text-align:center;color:var(--calm1);margin-bottom:28px}
 
-    /* Subtle blending: each section has its own soft gradient background that overlaps slightly */
     #about { background: linear-gradient(180deg, rgba(255,240,245,0.45), rgba(235,249,255,0.12)); }
     #projects { background: linear-gradient(180deg, rgba(244,238,255,0.45), rgba(230,245,255,0.08)); }
     #contact { background: linear-gradient(180deg, rgba(255,245,238,0.45), rgba(245,250,255,0.06)); }
 
-    /* Glass container for cards */
     .glass-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-    @media (max-width:980px){ .glass-grid{grid-template-columns:1fr} }
-
-    /* Glass card */
     .glass-card{
       background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.6));
       border-radius:14px;
@@ -147,7 +206,6 @@
     }
     .glass-card:hover{transform:translateY(-10px);box-shadow:0 28px 60px rgba(107,191,244,0.08)}
 
-    /* Icon block */
     .icon-wrap{
       min-width:56px;min-height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;
       background:linear-gradient(135deg, rgba(255,255,255,0.92), rgba(250,250,255,0.9));
@@ -159,10 +217,10 @@
     .glass-title{font-weight:700;margin-bottom:6px;color:#222}
     .glass-desc{color:rgba(34,34,34,0.68);font-size:0.95rem;line-height:1.45}
 
-    /* Projects: a bit taller */
     .project-glass{min-height:140px;display:flex;flex-direction:column;justify-content:space-between}
+    .project-glass .btn.secondary { transition: transform 0.2s ease; }
+    .project-glass .btn.secondary:hover { transform: scale(1.05); }
 
-    /* Contact */
     .contact-grid{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
     .contact-form{padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.62));border:1px solid rgba(255,255,255,0.5);backdrop-filter: blur(8px)}
     input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);font-size:0.95rem;margin-bottom:12px}
@@ -174,24 +232,7 @@
     }
     .social-btn:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(177,0,255,0.08)}
 
-    /* AOS tweaks for creative bounce */
-    [data-aos][data-aos][data-aos-duration] { will-change: transform, opacity; }
-
-    @media (max-width:980px){
-      .hero-inner{grid-template-columns:1fr;gap:26px}
-      .contact-grid{grid-template-columns:1fr}
-      #hero{padding-bottom:26px}
-    }
-    @media (max-width:520px){
-      h1{font-size:1.9rem}
-      .glass-card{padding:14px}
-      .contact-grid{grid-template-columns:1fr}
-    }
-
-    /* ---------- About layout: stylized image left, text right ---------- */
     .about-inner{display:grid;grid-template-columns:320px 1fr;gap:30px;align-items:center}
-    @media (max-width:980px){ .about-inner{grid-template-columns:1fr; text-align:center} .about-inner img{margin:0 auto} }
-
     .about-photo{
       width:320px;height:320px;object-fit:cover;border-radius:18px;border:8px solid rgba(255,255,255,0.7);
       box-shadow: 0 30px 60px rgba(12,20,40,0.06); transition:transform .45s cubic-bezier(.2,.9,.2,1);
@@ -200,11 +241,42 @@
     .about-photo.floaty:hover{transform:translateY(-8px) scale(1.02); box-shadow:0 40px 80px rgba(12,20,40,0.12)}
     .about-text p{font-size:1rem;color:rgba(34,34,34,0.8);line-height:1.6;margin-bottom:12px}
 
-    /* subtle section gap tweak for blending */
     .section-blend { margin-top:-24px; padding-top:40px; }
-
-    /* accessibility */
     .show-focus :focus{outline:3px solid rgba(107,191,244,0.35);outline-offset:3px}
+    
+    /* Toast message for contact form */
+    .toast-message {
+      position: fixed;
+      left: 50%;
+      top: 18%;
+      transform: translateX(-50%);
+      padding: 16px 22px;
+      background: linear-gradient(135deg, #fff, #f7fbff);
+      border-radius: 12px;
+      box-shadow: 0 18px 50px rgba(10, 12, 30, 0.14);
+      z-index: 140;
+      font-weight: 700;
+      color: #0b2340;
+      transition: opacity 0.45s, transform 0.45s;
+    }
+
+    /* Media Queries */
+    @media (max-width:980px){
+      .hero-inner{grid-template-columns:1fr;gap:26px; text-align: center;}
+      .hero-cta { justify-content: center; }
+      .contact-grid{grid-template-columns:1fr}
+      #hero{padding-bottom:26px}
+      .aesthetic-layer{align-items:center;text-align:center}
+      .aesthetic-text,.aesthetic-sub{text-align:center}
+      .aesthetics-wrap{position:relative; right:auto; top:auto; margin-top:8px; display: inline-flex;}
+      .about-inner{grid-template-columns:1fr; text-align:center}
+      .about-inner img{margin:0 auto}
+      .glass-grid{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      h1{font-size:1.9rem}
+      .glass-card{padding:14px}
+    }
   </style>
 </head>
 <body>
@@ -219,11 +291,10 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div style="margin-left:auto"></div>
-      <div class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle dark mode" aria-hidden="false">🌙</div>
+      <div class="dark-mode-toggle" id="darkToggle" title="Toggle dark mode">🌙</div>
     </nav>
   </header>
 
-  <!-- HERO (LEFT EXACTLY AS YOU APPROVED — UNCHANGED) -->
   <main>
     <section id="hero" aria-label="Intro">
       <div class="parallax" id="parallax" aria-hidden="true">
@@ -234,54 +305,52 @@
 
       <div class="hero-inner container">
         <div class="hero-column intro">
-          <div class="badge">✨ Featured · Interactive Portfolio</div>
-          <h1 id="typing-text" title="Click to change message">Hi, I'm Lisa Lopes<span id="cursor">▍</span></h1>
+          <div class="badge">Welcome to my world!</div>
+          <h1 id="typing-text" title="Click to change message">Hi, I'm Lisa Lopes</h1>
           <div class="sub">Creative designer & developer. I craft delightful interfaces and build small, scrappy Python projects.</div>
 
-          <div class="hero-cta" style="margin-top:14px">
+          <div class="hero-cta">
             <button class="btn" onclick="document.querySelector('#projects').scrollIntoView({behavior:'smooth'})">View Projects</button>
             <button class="btn secondary" onclick="document.querySelector('#contact').scrollIntoView({behavior:'smooth'})">Contact Me</button>
           </div>
-
-          <div style="margin-top:16px;color:rgba(0,0,0,0.55);font-size:0.92rem">
-            <span class="pill">Python</span><span class="pill">Web</span><span class="pill">UI/UX</span>
-          </div>
         </div>
 
-        <!-- Wave canvas (preserved) -->
-        <div class="hero-column" aria-hidden="false">
-          <div class="profile-wrap">
+        <div class="hero-column">
+          <div class="profile-wrap" id="profileWrap">
             <div class="wave-canvas-wrap" title="Interactive wave">
               <canvas id="waveCanvas" aria-label="Decorative animated wave"></canvas>
             </div>
-            <div class="profile-meta" style="margin-top:12px">
+            <div class="profile-meta">
               <div class="meta-left">
                 <div>
                   <h3>Lisa Lopes</h3>
                   <p>Python projects · Interactive prototypes</p>
                 </div>
               </div>
-              <div style="text-align:right">
-                <div style="font-weight:700;color:var(--calm1)">Open for work</div>
-                <div style="font-size:0.82rem;color:rgba(0,0,0,0.55)">Based online</div>
+
+              <!-- REPLACEMENT: Enhanced aesthetic text + floating particles -->
+              <div class="aesthetics-wrap" role="note" aria-label="Aesthetic tagline">
+                <canvas class="aesthetic-canvas" id="aestheticCanvas"></canvas>
+                <div class="aesthetic-layer" id="aestheticLayer">
+                  <div class="aesthetic-text">Embracing Aesthetics in Every Design ✿</div>
+                  <div class="aesthetic-sub">Soft visuals • Thoughtful interactions</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
       <div class="scroll-indicator" aria-hidden="true">↓</div>
     </section>
 
-    <!-- ABOUT (stylized) -->
+    <!-- ABOUT -->
     <section id="about" aria-label="About me" class="section-blend">
       <div class="container" data-aos="fade-up" data-aos-duration="800">
         <h2>About Me</h2>
         <div class="about-inner" style="margin-top:20px">
-          <!-- ABOUT PHOTO: replace about-photo.jpg with your own .jpg -->
           <div data-aos="fade-right" data-aos-duration="700" data-aos-delay="80">
-            <img class="about-photo floaty" src="IMG-20251022-WA0006.jpg" alt="Lisa Lopes portrait (replace about-photo.jpg)" />
+            <!-- IMPORTANT: Replace this placeholder URL with the actual URL to your photo -->
+            <img class="about-photo floaty" src="lisa.jpg" alt="A professional headshot of Lisa Lopes." />
           </div>
 
           <div class="about-text" data-aos="fade-left" data-aos-duration="700" data-aos-delay="140">
@@ -293,7 +362,7 @@
       </div>
     </section>
 
-    <!-- SKILLS (unchanged style but included for cohesion) -->
+    <!-- SKILLS -->
     <section id="skills" aria-label="Skills">
       <div class="container" data-aos="fade-up" data-aos-duration="800" data-aos-delay="80">
         <h2>Skills I'm Currently Working On</h2>
@@ -341,362 +410,364 @@
               <div class="glass-desc">Conversational practice and applied learning for broader communication.</div>
             </div>
           </div>
-
-          <!-- Continuous learning card -->
-          <div class="glass-card" data-aos="fade-up" data-aos-duration="700" data-aos-delay="280">
-            <div class="icon-wrap hoverable" aria-hidden="true" title="Continuous Learning">
-              <i class="fa-solid fa-seedling" style="font-size:18px;color:#3aa76d;"></i>
-            </div>
-            <div>
-              <div class="glass-title">Continuous Learning</div>
-              <div class="glass-desc">Experimenting with UX patterns, lightweight frameworks, and marketing tactics.</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- PROJECTS (updated list) -->
+    <!-- PROJECTS -->
     <section id="projects" aria-label="Projects" class="section-blend">
       <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-delay="80">
         <h2>Featured Projects</h2>
         <div class="glass-grid" style="margin-top:18px">
-          <!-- Blind Auction -->
           <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="120">
             <div>
               <div class="glass-title">Blind Auction Project</div>
               <div class="glass-desc">A fun Python-based bidding system where players place secret bids and the highest wins — includes validation and result logic. 🎉</div>
             </div>
-            <div style="text-align:right"><a class="btn secondary" href="#" target="_blank" rel="noreferrer">View Project</a></div>
+            <div style="text-align:right"><a class="btn secondary" href="https://github.com/lisalopes0408/python-projects/tree/main/Blind_Auction_Project" target="_blank" rel="noreferrer">View Project</a></div>
           </div>
-
-          <!-- Caesar Cipher -->
           <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="160">
             <div>
               <div class="glass-title">Caesar Cipher</div>
               <div class="glass-desc">Text encryption using substitution and shift keys — a simple secure-messaging demo with CLI examples. 🔐</div>
             </div>
-            <div style="text-align:right"><a class="btn secondary" href="#" target="_blank" rel="noreferrer">View Project</a></div>
+            <div style="text-align:right"><a class="btn secondary" href="https://github.com/lisalopes0408/python-projects/tree/main/Caesar_Cipher_3" target="_blank" rel="noreferrer">View Project</a></div>
           </div>
-
-          <!-- Hangman -->
           <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="200">
             <div>
               <div class="glass-title">Hangman Game</div>
               <div class="glass-desc">Interactive Python word-guessing game with difficulty modes, word lists and ASCII visuals. 🧠</div>
             </div>
-            <div style="text-align:right"><a class="btn secondary" href="#" target="_blank" rel="noreferrer">View Project</a></div>
+            <div style="text-align:right"><a class="btn secondary" href="https://github.com/lisalopes0408/python-projects/tree/main/hangman" target="_blank" rel="noreferrer">View Project</a></div>
           </div>
-
-          <!-- Rock Paper Scissors -->
           <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="240">
             <div>
               <div class="glass-title">Rock Paper Scissors</div>
               <div class="glass-desc">Classic RPS game written in Python — includes scorekeeping, best-of modes and CLI interface. ✊📄✂️</div>
             </div>
-            <div style="text-align:right"><a class="btn secondary" href="#" target="_blank" rel="noreferrer">View Project</a></div>
+            <div style="text-align:right"><a class="btn secondary" href="https://github.com/lisalopes0408/python-projects/tree/main/Rock_Paper_Scissors" target="_blank" rel="noreferrer">View Project</a></div>
           </div>
-
-          <!-- Treasure Hunt -->
-          <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="280">
-            <div>
-              <div class="glass-title">Treasure Hunt</div>
-              <div class="glass-desc">A choose-your-adventure style game combining branching logic and puzzles to find hidden treasures. 🗺️💎</div>
-            </div>
-            <div style="text-align:right"><a class="btn secondary" href="#" target="_blank" rel="noreferrer">View Project</a></div>
-          </div>
-
-          <!-- Password Generator -->
-          <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="320">
+          <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="240">
             <div>
               <div class="glass-title">Password Generator</div>
               <div class="glass-desc">Secure password generator with options for length, character sets, and entropy hints — practical security tool. 🔑</div>
             </div>
-            <div style="text-align:right"><a class="btn secondary" href="#" target="_blank" rel="noreferrer">View Project</a></div>
+            <div style="text-align:right"><a class="btn secondary" href="https://github.com/lisalopes0408/python-projects/tree/main/Password_Generator_Project" target="_blank" rel="noreferrer">View Project</a></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT (soft peach) -->
-    <section id="contact" aria-label="Contact" class="section-blend">
-      <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-delay="80">
-        <h2>Let’s Connect</h2>
-        <div class="contact-grid" style="margin-top:18px">
-          <div class="contact-form" data-aos="fade-up" data-aos-duration="800" data-aos-delay="120">
-            <form id="contactForm">
-              <input id="cname" type="text" placeholder="Your Name" required>
-              <input id="cemail" type="email" placeholder="Your Email" required>
-              <textarea id="cmessage" placeholder="Your Message" rows="6" required></textarea>
-              <div style="display:flex;gap:12px;align-items:center">
-                <button type="submit">Send a Message</button>
-                <div style="font-size:0.9rem;color:rgba(0,0,0,0.6)">Or email: <strong>lisa@example.com</strong></div>
-              </div>
-            </form>
-          </div>
+    <!-- CONTACT -->
+ <section id="projects" aria-label="Projects" class="section-blend">
+  <div class="container" data-aos="fade-up" data-aos-duration="900" data-aos-delay="80" 
+       style="display:flex;justify-content:center;align-items:center;flex-direction:column;text-align:center;min-height:60vh;">
+       
+    <h2>Contact Me</h2>
+    
+    <div class="glass-grid" style="margin-top:18px;display:flex;justify-content:center;align-items:center;">
+      <div class="glass-card project-glass" data-aos="zoom-in-up" data-aos-duration="700" data-aos-delay="120"
+           style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;">
+           
+        <div class="socials" style="margin-top:6px;display:flex;gap:12px;justify-content:center;" data-aos="fade-up" data-aos-delay="200">
+          <a class="social-btn" href="https://www.linkedin.com/in/lisa-lopes-1b0845385/" target="_blank" rel="noreferrer" aria-label="LinkedIn (demo)">
+            <i class="fa-brands fa-linkedin-in" style="font-size:16px"></i>
+          </a>
+          <a class="social-btn" href="https://github.com/lisalopes0408" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <i class="fa-brands fa-github" style="font-size:16px"></i>
+          </a>
+          <a class="social-btn" href="mailto:lisalopes995@gmail.com" aria-label="Email (demo)">
+            <i class="fa-solid fa-envelope" style="font-size:15px"></i>
+          </a>
+        </div>
 
-          <div>
-            <div class="glass-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="160" style="flex-direction:column;align-items:flex-start;gap:14px">
-              <div>
-                <div style="font-weight:700;font-size:1.05rem">Socials</div>
-                <div style="color:rgba(0,0,0,0.65);margin-top:6px">Demo links — replace with your real profiles anytime.</div>
-              </div>
-              <div class="socials" style="margin-top:6px" data-aos="fade-up" data-aos-delay="200">
-                <a class="social-btn" href="https://linkedin.com/in/lisalopes" target="_blank" rel="noreferrer" aria-label="LinkedIn (demo)">
-                  <i class="fa-brands fa-linkedin-in" style="font-size:16px"></i>
-                </a>
-                <a class="social-btn" href="https://github.com/lisalopes" target="_blank" rel="noreferrer" aria-label="GitHub (demo)">
-                  <i class="fa-brands fa-github" style="font-size:16px"></i>
-                </a>
-                <a class="social-btn" href="mailto:lisa@example.com" aria-label="Email (demo)">
-                  <i class="fa-solid fa-envelope" style="font-size:15px"></i>
-                </a>
-              </div>
-
-              <div style="margin-top:6px;color:rgba(0,0,0,0.6);font-size:0.95rem">
-                <div><strong>Location:</strong> Remote / Online</div>
-                <div><strong>Availability:</strong> Open to freelance & short-term projects</div>
-              </div>
-            </div>
-
-            <div style="height:12px"></div>
-
-            <div class="glass-card" data-aos="fade-left" data-aos-duration="800" data-aos-delay="220" style="align-items:center;gap:10px">
-              <div style="font-weight:700">Quick Note</div>
-              <div style="color:rgba(0,0,0,0.65);font-size:0.95rem">Please include your goal, timeline, and budget for a faster reply.</div>
-            </div>
-          </div>
+        <div style="margin-top:12px;color:rgba(0,0,0,0.6);font-size:0.95rem;text-align:center;">
+          <div><strong>Location:</strong> Remote / Online</div>
+          <div><strong>Availability:</strong> Open to freelance & short-term projects</div>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer>
     <div class="container" style="padding:22px 0;text-align:center">
       <div data-aos="fade-up" data-aos-duration="900" data-aos-delay="120" style="display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap">
         <div style="font-weight:600">© <span id="year"></span> Lisa Lopes</div>
         <div style="color:rgba(0,0,0,0.55)">— Built with curiosity and care</div>
-        <div style="width:12px"></div>
-        <div style="display:flex;gap:8px">
-          <a class="social-btn" href="https://linkedin.com/in/lisalopes" target="_blank" rel="noreferrer" aria-label="LinkedIn (demo)">
-            <i class="fa-brands fa-linkedin-in" style="font-size:14px"></i>
-          </a>
-          <a class="social-btn" href="https://github.com/lisalopes" target="_blank" rel="noreferrer" aria-label="GitHub (demo)">
-            <i class="fa-brands fa-github" style="font-size:14px"></i>
-          </a>
-          <a class="social-btn" href="mailto:lisa@example.com" aria-label="Email (demo)">
-            <i class="fa-solid fa-envelope" style="font-size:13px"></i>
-          </a>
-        </div>
       </div>
     </div>
   </footer>
 
-  <!-- ---------- JS: preserved front-page typing & parallax & wave + AOS init + contact ---------- -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // init AOS with creative easing & bounce-like effect
-    AOS.init({
-      duration: 700,
-      easing: 'cubic-bezier(.2,.8,.2,1)',
-      once: true,
-      offset: 120,
-    });
-  </script>
+    // ---------- Main script execution ----------
+    document.addEventListener('DOMContentLoaded', () => {
 
-  <script>
-    // set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
+      // Initialize AOS (Animate on Scroll)
+      AOS.init({
+        duration: 700,
+        easing: 'cubic-bezier(.2,.8,.2,1)',
+        once: true,
+        offset: 120,
+      });
 
-    /* ---------- Typing animation (clickable to toggle message) ---------- */
-    const typingTextEl = document.getElementById('typing-text');
-    const cursor = document.getElementById('cursor');
-    const baseText = "Hi, I'm Lisa Lopes";
-    const altText = "Welcome to my world ✨";
-    let typingIndex = 0;
-    let isDeleting = false;
-    let currentText = baseText;
-    let typingInterval;
+      // Set current year in footer
+      const yearEl = document.getElementById('year');
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
 
-    function startTyping(){
-      typingInterval = setInterval(() => {
-        if (!isDeleting) {
-          typingIndex++;
-          typingTextEl.textContent = currentText.slice(0, typingIndex);
-          if (typingIndex >= currentText.length) {
-            setTimeout(()=>{ isDeleting = true; }, 900);
+      /* ---------- Typing animation ---------- */
+      (function initTyping() {
+        const el = document.getElementById('typing-text');
+        if (!el) return;
+
+        const baseText = "Hi, I'm Lisa Lopes";
+        const altText = "Welcome to my world ✨";
+        let typingIndex = 0;
+        let isDeleting = false;
+        let currentText = baseText;
+
+        function type() {
+          if (!isDeleting && typingIndex < currentText.length) {
+            typingIndex++;
+          } else if (isDeleting && typingIndex > 0) {
+            typingIndex--;
           }
-        } else {
-          typingIndex--;
-          typingTextEl.textContent = currentText.slice(0, typingIndex);
-          if (typingIndex <= 0) {
+
+          el.textContent = currentText.slice(0, typingIndex);
+
+          if (!isDeleting && typingIndex === currentText.length) {
+            setTimeout(() => isDeleting = true, 2000);
+          } else if (isDeleting && typingIndex === 0) {
             isDeleting = false;
             currentText = (currentText === baseText) ? altText : baseText;
           }
         }
-      }, 70);
-    }
-    startTyping();
-    typingTextEl.addEventListener('click', () => {
-      clearInterval(typingInterval);
-      currentText = (currentText === baseText) ? altText : baseText;
-      typingIndex = 0;
-      isDeleting = false;
-      startTyping();
-    });
+        const typingInterval = setInterval(type, 80);
 
-    // simple blinking cursor
-    setInterval(()=>{ cursor.style.opacity = cursor.style.opacity === '0' ? '1' : '0' }, 600);
+        el.addEventListener('click', () => {
+          isDeleting = true;
+        });
+      })();
 
-    /* ---------- Parallax shapes (on scroll & tilt) ---------- */
-    const parallaxRoot = document.getElementById('parallax');
-    const shapes = Array.from(parallaxRoot.querySelectorAll('.p-shape'));
-    function updateParallax(){
-      const scrolled = window.scrollY;
-      shapes.forEach((el)=>{
-        const speed = parseFloat(el.getAttribute('data-speed') || '0.2');
-        el.style.transform = `translateY(${scrolled * speed}px) translateZ(0)`;
+      /* ---------- Parallax shapes ---------- */
+      (function initParallax() {
+        const parallaxRoot = document.getElementById('parallax');
+        if (!parallaxRoot) return;
+        const shapes = Array.from(parallaxRoot.querySelectorAll('.p-shape'));
+        const hero = document.getElementById('hero');
+
+        function updateParallax() {
+          const scrolled = window.scrollY;
+          shapes.forEach(el => {
+            const speed = parseFloat(el.getAttribute('data-speed') || '0.2');
+            el.style.transform = `translateY(${scrolled * speed}px) rotate(${el.style.rotate || '0deg'})`;
+          });
+        }
+
+        window.addEventListener('scroll', updateParallax, { passive: true });
+        
+        if (hero) {
+            hero.addEventListener('mousemove', (e) => {
+                const w = hero.offsetWidth;
+                const h = hero.offsetHeight;
+                const mx = (e.clientX - hero.getBoundingClientRect().left) / w - 0.5;
+                const my = (e.clientY - hero.getBoundingClientRect().top) / h - 0.5;
+                
+                shapes.forEach((s, i) => {
+                    const factor = 8 + (i * 4);
+                    const scrollY = window.scrollY * parseFloat(s.getAttribute('data-speed') || '0.2');
+                    s.style.transform = `translate3d(${mx * factor}px, ${scrollY - my * factor}px, 0)`;
+                });
+            });
+        }
+        updateParallax();
+      })();
+
+      /* ---------- Contact form handler ---------- */
+      (function initContactForm() {
+        const form = document.getElementById('contactForm');
+        if (!form) return;
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = document.getElementById('cname').value || 'there';
+          
+          const toast = document.createElement('div');
+          toast.className = 'toast-message';
+          toast.textContent = `Thanks, ${name}! I’ll reply soon ✨`;
+          document.body.appendChild(toast);
+
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transform = 'translateX(-50%) translateY(-20px)';
+            setTimeout(() => toast.remove(), 500);
+          }, 2000);
+          form.reset();
+        });
+      })();
+
+      /* ---------- Accessibility focus style toggle ---------- */
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') document.body.classList.add('show-focus')
       });
-    }
-    window.addEventListener('scroll', updateParallax, {passive:true});
-    updateParallax();
 
-    // gentle mousemove parallax for hero shapes
-    const hero = document.getElementById('hero');
-    hero.addEventListener('mousemove', (e)=>{
-      const w = hero.offsetWidth, h = hero.offsetHeight;
-      const mx = (e.clientX - hero.getBoundingClientRect().left) / w - 0.5;
-      const my = (e.clientY - hero.getBoundingClientRect().top) / h - 0.5;
-      shapes.forEach((s,i)=>{
-        const factor = 8 + (i*4);
-        s.style.transform += ` translateX(${mx * factor}px) translateY(${ - my * factor}px)`;
-      });
-    });
+      /* ---------- Dark mode toggle ---------- */
+      (function initDarkMode() {
+        const toggleBtn = document.getElementById('darkToggle');
+        if (!toggleBtn) return;
+        toggleBtn.addEventListener('click', () => {
+          document.body.classList.toggle('dark-mode');
+          toggleBtn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+        });
+      })();
 
-    /* ---------- Contact form (JS demo: success modal/alert + reset) ---------- */
-    const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', function(e){
-      e.preventDefault();
-      const name = document.getElementById('cname').value || 'there';
-      const el = document.createElement('div');
-      el.style.position='fixed';el.style.left='50%';el.style.top='18%';el.style.transform='translateX(-50%)';
-      el.style.padding='16px 22px';el.style.background='linear-gradient(135deg,#fff,#f7fbff)';el.style.borderRadius='12px';
-      el.style.boxShadow='0 18px 50px rgba(10,12,30,0.14)';el.style.zIndex=140;el.style.fontWeight=700;color:#0b2340;
-      el.textContent = `Thanks, ${name}! Your message has been received — I’ll reply soon ✨`;
-      document.body.appendChild(el);
-      setTimeout(()=>{ el.style.transition='opacity .45s'; el.style.opacity='0'; setTimeout(()=>el.remove(),500) },1400);
-      contactForm.reset();
-    });
+      /* ---------- Pastel Wave Canvas ---------- */
+      (function initWaveCanvas() {
+        const canvas = document.getElementById('waveCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let w = 0, h = 0;
+        let mouse = { x: 0.5, y: 0.5 };
 
-    /* ---------- Fake repo/open action for projects (placeholder) ---------- */
-    function fakeOpen(name){
-      const el = document.createElement('div');
-      el.style.position='fixed';el.style.left='50%';el.style.top='50%';el.style.transform='translate(-50%,-50%)';
-      el.style.padding='18px 22px';el.style.background='linear-gradient(135deg,#fff,#f7f7ff)';el.style.borderRadius='12px';
-      el.style.boxShadow='0 20px 60px rgba(10,12,30,0.2)';el.style.zIndex=120;el.style.fontWeight=700;color:#0b2340;
-      el.textContent = `Open placeholder: ${name}`;
-      document.body.appendChild(el);
-      setTimeout(()=>{ el.style.transition='opacity .4s'; el.style.opacity='0'; setTimeout(()=>el.remove(),400) },1100);
-    }
+        const waves = [
+          { amp: 18, len: 0.015, speed: 0.9, colorA: 'rgba(255,182,193,0.45)', colorB: 'rgba(255,105,180,0.12)', phase: 0 },
+          { amp: 12, len: 0.02, speed: 1.1, colorA: 'rgba(186,225,255,0.32)', colorB: 'rgba(177,0,255,0.05)', phase: 2 },
+          { amp: 8, len: 0.03, speed: 0.6, colorA: 'rgba(255,240,245,0.28)', colorB: 'rgba(255,200,220,0.06)', phase: 4 }
+        ];
 
-    /* ---------- Accessibility focus style toggle ---------- */
-    document.addEventListener('keydown',(e)=>{ if(e.key==='Tab') document.body.classList.add('show-focus') });
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          const rect = canvas.getBoundingClientRect();
+          w = rect.width; h = rect.height;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
+          ctx.scale(dpr, dpr);
+        }
+        window.addEventListener('resize', resize);
+        resize();
 
-    /* ---------- Pastel Wave Canvas (preserved) ---------- */
-    (function initWave(){
-      const canvas = document.getElementById('waveCanvas');
-      const ctx = canvas.getContext('2d');
-      let DPR = Math.max(1, window.devicePixelRatio || 1);
-      let w = 0, h = 0;
-      let mouse = {x: 0.5, y: 0.5, moving: false};
+        canvas.addEventListener('mousemove', (e) => {
+            const r = canvas.getBoundingClientRect();
+            mouse.x = (e.clientX - r.left) / r.width;
+            mouse.y = (e.clientY - r.top) / r.height;
+        });
+        canvas.addEventListener('mouseleave', () => { mouse.x = 0.5; mouse.y = 0.5; });
 
-      const waves = [
-        {amp: 18, len: 0.015, speed: 0.9, colorA: 'rgba(255,182,193,0.45)', colorB: 'rgba(255,105,180,0.12)', phase: 0},
-        {amp: 12, len: 0.02, speed: 1.1, colorA: 'rgba(186,225,255,0.32)', colorB: 'rgba(177,0,255,0.05)', phase: 2},
-        {amp: 8,  len: 0.03, speed: 0.6, colorA: 'rgba(255,240,245,0.28)', colorB: 'rgba(255,200,220,0.06)', phase: 4}
-      ];
+        let t = 0;
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          waves.forEach((wave, idx) => {
+            wave.phase += wave.speed * 0.012;
+            ctx.beginPath();
+            ctx.moveTo(0, h);
+            for (let i = 0; i <= 100; i++) {
+              const x = (i / 100) * w;
+              const y = h * 0.6 + Math.sin(x * wave.len + wave.phase) * wave.amp * (1 + Math.sin(t*0.001));
+              const edgeFade = Math.sin((i/100) * Math.PI);
+              const mouseOffsetY = (mouse.y - 0.5) * 30 * edgeFade;
+              ctx.lineTo(x, y + mouseOffsetY);
+            }
+            ctx.lineTo(w, h);
+            ctx.closePath();
+            const g = ctx.createLinearGradient(0, 0, w, h);
+            g.addColorStop(0, wave.colorA); g.addColorStop(1, wave.colorB);
+            ctx.fillStyle = g;
+            ctx.fill();
+          });
+          t++;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      })();
 
-      function resize(){
-        DPR = Math.max(1, window.devicePixelRatio || 1);
-        const rect = canvas.getBoundingClientRect();
-        w = Math.max(300, Math.floor(rect.width));
-        h = Math.max(160, Math.floor(rect.height));
-        canvas.width = Math.floor(w * DPR);
-        canvas.height = Math.floor(h * DPR);
-        canvas.style.width = w + 'px';
-        canvas.style.height = h + 'px';
-        ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      }
-      window.addEventListener('resize', resize);
-      resize();
+      /* ---------- ENHANCED Aesthetic Particle Canvas ---------- */
+      (function initAestheticCanvas() {
+        const canvas = document.getElementById('aestheticCanvas');
+        const wrap = document.querySelector('.aesthetics-wrap');
+        const profileWrap = document.getElementById('profileWrap');
+        if (!canvas || !wrap || !profileWrap) return;
 
-      canvas.addEventListener('mousemove', (e)=>{
-        const r = canvas.getBoundingClientRect();
-        mouse.x = (e.clientX - r.left) / r.width;
-        mouse.y = (e.clientY - r.top) / r.height;
-        mouse.moving = true;
-      });
-      canvas.addEventListener('mouseleave', ()=>{ mouse.moving = false; mouse.x = 0.5; mouse.y = 0.5; });
+        const ctx = canvas.getContext('2d');
+        let w = 0, h = 0;
+        const mouse = { x: null, y: null, radius: 80 };
 
-      let t = 0;
-      function draw(){
-        ctx.clearRect(0,0,w,h);
+        const colors = ['rgba(255,255,255,0.9)','rgba(229,215,255,0.9)','rgba(255,230,245,0.85)'];
+        let particles = [];
+        
+        function resize() {
+          const dpr = window.devicePixelRatio || 1;
+          const rect = wrap.getBoundingClientRect();
+          w = rect.width; h = rect.height;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          canvas.style.width = `${w}px`; canvas.style.height = `${h}px`;
+          ctx.scale(dpr, dpr);
+          seed();
+        }
 
-        const bg = ctx.createLinearGradient(0,0, w, h);
-        bg.addColorStop(0, 'rgba(255,247,250,0.85)');
-        bg.addColorStop(1, 'rgba(235,249,255,0.85)');
-        ctx.fillStyle = bg;
-        ctx.fillRect(0,0,w,h);
-
-        waves.forEach((wave, idx) => {
-          const offsetX = (mouse.x - 0.5) * 40 * (idx+1) * 0.2;
-          const offsetY = (mouse.y - 0.5) * 20 * (idx+1) * 0.12;
-          wave.phase += wave.speed * 0.012;
-
-          const g = ctx.createLinearGradient(0, 0, w, h);
-          g.addColorStop(0, wave.colorA);
-          g.addColorStop(1, wave.colorB);
-
-          ctx.fillStyle = g;
-          ctx.beginPath();
-          ctx.moveTo(0, h);
-          const points = 120;
-          for(let i = 0; i <= points; i++){
-            const x = (i / points) * w;
-            const norm = i / points;
-            const y = h*0.6 + Math.sin((x * wave.len) + wave.phase + idx) * wave.amp * (1 + Math.sin(t*0.001 + idx)) + offsetY * (1 + Math.sin(t*0.0006+idx));
-            const edge = Math.sin(norm * Math.PI);
-            ctx.lineTo(x + offsetX * edge, y * (0.95 + 0.06*edge));
+        function seed() {
+          particles = [];
+          const count = Math.max(8, Math.round(w / 40));
+          for (let i = 0; i < count; i++) {
+            particles.push({
+              x: Math.random() * w, y: Math.random() * h,
+              originX: Math.random() * w, originY: Math.random() * h,
+              r: 4 + Math.random() * 8,
+              col: colors[Math.floor(Math.random() * colors.length)],
+              vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.2
+            });
           }
-          ctx.lineTo(w, h);
-          ctx.closePath();
-          ctx.globalAlpha = 0.95 - (idx * 0.18);
-          ctx.fill();
+        }
+        
+        window.addEventListener('resize', resize);
+        resize();
 
-          ctx.globalCompositeOperation = 'lighter';
-          ctx.fillStyle = 'rgba(255,255,255,0.03)';
-          ctx.fill();
-          ctx.globalCompositeOperation = 'source-over';
+        profileWrap.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = e.clientX - rect.left;
+            mouse.y = e.clientY - rect.top;
+        });
+        profileWrap.addEventListener('mouseleave', () => {
+            mouse.x = null; mouse.y = null;
         });
 
-        const sheen = ctx.createLinearGradient(0,0,w,0);
-        sheen.addColorStop(0, 'rgba(255,255,255,0.0)');
-        sheen.addColorStop(0.5, 'rgba(255,255,255,0.06)');
-        sheen.addColorStop(1, 'rgba(255,255,255,0.0)');
-        ctx.fillStyle = sheen;
-        ctx.fillRect(0, h*0.1, w, h*0.8);
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          particles.forEach(p => {
+            let dx = mouse.x - p.x;
+            let dy = mouse.y - p.y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
 
-        t++;
-        requestAnimationFrame(draw);
-      }
-      draw();
-    })();
+            if (dist < mouse.radius) {
+                const forceDirectionX = dx / dist;
+                const forceDirectionY = dy / dist;
+                const force = (mouse.radius - dist) / mouse.radius;
+                p.x -= forceDirectionX * force * 1.5;
+                p.y -= forceDirectionY * force * 1.5;
+            } else {
+                p.x += (p.originX - p.x) * 0.01 + p.vx;
+                p.y += (p.originY - p.y) * 0.01 + p.vy;
+            }
+
+            ctx.beginPath();
+            ctx.fillStyle = p.col;
+            ctx.globalAlpha = 0.5;
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          requestAnimationFrame(draw);
+        }
+        draw();
+        
+        setTimeout(() => {
+          wrap.classList.add('aesthetic-visible');
+        }, 420);
+      })();
+    });
   </script>
-
-  <!-- AOS script re-init at end -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script> AOS.init({ duration:700, easing:'cubic-bezier(.2,.8,.2,1)', once:true, offset:120 }); </script>
 </body>
 </html>
